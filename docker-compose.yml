@@ -1,0 +1,11 @@
+services:
+  backend:
+    build: .
+    container_name: backend-nestjs
+    ports:
+      - "4000:4000"          # publica a porta explicitamente
+    env_file:
+      - .env
+    restart: unless-stopped
+    network_mode: bridge     # garante que Docker mapeie a porta corretamente
+
