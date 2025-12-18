@@ -1,6 +1,11 @@
 O BACKEND ESTÁ RODANDO NA PORTA 4000
 
-PARA QUE FUNCIONE COM O FRONT O FRONT DEVE ESTAR NA PORTA 3000 POR CONTA DO CORS.
+PARA QUE FUNCIONE O FRONT DEVE ESTAR NA PORTA 3000 POR CONTA DO CORS.
+
+Edite src/lib/api.ts para alterar a URL do backend para a porta 4000:
+export const api = axios.create({
+  baseURL: process.env.NEXT_PUBLIC_API_URL || 'http://localhost:4000',
+})
 
 CRIE UM ARQUIVO .env na raiz o projeto com os dados do banco:
 DATABASE_URL="mysql://user_test:A.../sofman"
