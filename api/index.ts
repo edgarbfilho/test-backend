@@ -15,7 +15,9 @@ async function bootstrap() {
       const express = (expressModule as any).default ?? expressModule
       const server = express()
 
-      const app = await NestFactory.create(AppModule, new ExpressAdapter(server))
+      const app = await NestFactory.create(AppModule, new ExpressAdapter(server), {
+        bodyParser: false,
+      })
 
       app.enableCors({
         origin: '*',
