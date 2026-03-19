@@ -1,9 +1,6 @@
 import 'reflect-metadata'
-import { VercelRequest, VercelResponse } from '@vercel/node'
-import { NestFactory } from '@nestjs/core'
-import { AppModule } from '../src/app.module'
-import { ExpressAdapter } from '@nestjs/platform-express'
-import express from 'express'
+import type { VercelRequest, VercelResponse } from '@vercel/node'
+import * as express from 'express'
 
 const server = express()
 let appPromise: Promise<any>
@@ -11,6 +8,12 @@ let appPromise: Promise<any>
 async function bootstrap() {
   if (!appPromise) {
     appPromise = (async () => {
+      const [{ NestFactory }, { ExpressAdapter }, { AppModule }] = await Promise.all([
+        import('@nestjs/core'),
+        import('@nestjs/platform-express'),
+        import('../src/app.module'),
+      ])
+
       const app = await NestFactory.create(AppModule, new ExpressAdapter(server))
 
       app.enableCors({
@@ -36,6 +39,7 @@ export default async function handler(req: VercelRequest, res: VercelResponse) {
       success: false,
       message: 'Erro interno ao iniciar API',
       error: error?.message ?? 'Erro desconhecido',
+      stack: error?.stack,
     })
   }
 }
