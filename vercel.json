@@ -1,14 +1,5 @@
 {
   "version": 2,
-  "functions": {
-    "api/index.ts": {
-      "includeFiles": [
-        "prisma/**",
-        "node_modules/.prisma/client/**",
-        "node_modules/@prisma/client/**"
-      ]
-    }
-  },
   "builds": [
     {
       "src": "api/index.ts",
