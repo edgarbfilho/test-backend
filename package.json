@@ -1,0 +1,25 @@
+{
+  "name": "sofman-api",
+  "version": "1.0.0",
+  "scripts": {
+    "build": "nest build",
+    "start": "node dist/main.js",
+    "start:dev": "nest start --watch"
+  },
+  "dependencies": {
+    "@nestjs/common": "^11.0.0",
+    "@nestjs/core": "^11.0.0",
+    "@nestjs/passport": "^11.0.5",
+    "@nestjs/platform-express": "^11.1.9",
+    "@prisma/client": "^6.7.0",
+    "mysql2": "^3.16.0",
+    "nestjs-zod": "^5.0.1",
+    "passport": "^0.7.0",
+    "zod": "^4.2.1"
+  },
+  "devDependencies": {
+    "@nestjs/cli": "^11.0.14",
+    "prisma": "^6.7.0",
+    "typescript": "^5.0.0"
+  }
+}
