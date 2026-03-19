@@ -1,8 +1,5 @@
 import 'reflect-metadata'
 import type { VercelRequest, VercelResponse } from '@vercel/node'
-import * as express from 'express'
-
-const server = express()
 let appPromise: Promise<any>
 
 async function bootstrap() {
@@ -13,6 +10,10 @@ async function bootstrap() {
         import('@nestjs/platform-express'),
         import('../src/app.module'),
       ])
+
+      const expressModule = await import('express')
+      const express = (expressModule as any).default ?? expressModule
+      const server = express()
 
       const app = await NestFactory.create(AppModule, new ExpressAdapter(server))
 
