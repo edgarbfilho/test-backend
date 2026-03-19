@@ -3,7 +3,7 @@ import { VercelRequest, VercelResponse } from '@vercel/node'
 import { NestFactory } from '@nestjs/core'
 import { AppModule } from '../src/app.module'
 import { ExpressAdapter } from '@nestjs/platform-express'
-import * as express from 'express'
+import express from 'express'
 
 const server = express()
 let appPromise: Promise<any>
@@ -27,6 +27,15 @@ async function bootstrap() {
 }
 
 export default async function handler(req: VercelRequest, res: VercelResponse) {
-  const app = await bootstrap()
-  return app(req, res)
+  try {
+    const app = await bootstrap()
+    return app(req, res)
+  } catch (error: any) {
+    console.error('Erro ao iniciar função na Vercel:', error)
+    return res.status(500).json({
+      success: false,
+      message: 'Erro interno ao iniciar API',
+      error: error?.message ?? 'Erro desconhecido',
+    })
+  }
 }
