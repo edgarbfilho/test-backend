@@ -3,7 +3,7 @@ import { VercelRequest, VercelResponse } from '@vercel/node'
 import { NestFactory } from '@nestjs/core'
 import { AppModule } from '../src/app.module'
 import { ExpressAdapter } from '@nestjs/platform-express'
-import express from 'express'
+import * as express from 'express'
 
 const server = express()
 let appPromise: Promise<any>
